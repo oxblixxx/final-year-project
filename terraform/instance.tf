@@ -5,7 +5,6 @@ resource "aws_instance" "bastion_host" {
   subnet_id              = aws_subnet.public_subnet_main.id
   key_name               = aws_key_pair.bastion_host.key_name
   vpc_security_group_ids = [aws_security_group.public_subnet_main.id]
-  security_groups        = ["aws_security_group.public_subnet_main.id"]
   tags = {
     Name        = "bastion_host"
     Terraform   = "true"
@@ -29,7 +28,7 @@ resource "aws_instance" "internal_server" {
   instance_type = var.instance_type
   subnet_id     = aws_subnet.private_subnet_main.id
   #  user_data       = data.template_file.script.rendered
-  security_groups = ["aws_security_group.private_subnet_main"]
+  vpc_security_group_ids = [aws_security_group.private_subnet_main.id]
   tags = {
     Name        = "EFS_TEST"
     Terraform   = "true"
