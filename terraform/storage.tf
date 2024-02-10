@@ -1,6 +1,6 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
 resource "aws_s3_bucket" "flow_log_bucket" {
-  bucket = "flow_log"
+  bucket        = "oxblixxx-flow-log1234"
   force_destroy = false
 }
 
