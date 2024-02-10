@@ -38,6 +38,18 @@ resource "aws_security_group" "private_subnet" {
   }
 }
 
+resource "aws_security_group" "internal_efs" {
+  name        = "Internal EFS inbound rule"
+  description = "Allow inbound rule from internal_server"
+
+  ingress {
+    from_port   = 2096
+    to_port     = 2096
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # Bastion Host cidr_block
+  }
+}
+
 
 
 
