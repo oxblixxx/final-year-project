@@ -26,7 +26,7 @@ resource "aws_security_group" "public_subnet" {
   }
 }
 
-resource "aws_security_group" "public_subnet" {
+resource "aws_security_group" "private_subnet" {
   name        = "public-sg-group"
   description = "Security group for bastion host in public subnet"
 
