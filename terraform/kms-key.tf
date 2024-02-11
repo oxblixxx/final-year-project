@@ -12,30 +12,16 @@ resource "aws_kms_key_policy" "internal_efs" {
   policy = <<-EOF
 {
   "Version": "2012-10-17",
+  "Id": "key-consolepolicy-2",
   "Statement": [
     {
-      "Sid": "Stmt1707531765822",
-      "Action": [
-        "kms:Create*",
-        "kms:Describe*",
-        "kms:Enable*",
-        "kms:List*",
-        "kms:Put*",
-        "kms:Update*",
-        "kms:Revoke*",
-        "kms:Disable*",
-        "kms:Get*",
-        "kms:Delete*",
-        "kms:TagResource",
-        "kms:UntagResource",
-        "kms:ScheduleKeyDeletion",
-        "kms:CancelKeyDeletion"
-      ],
+      "Sid": "Allow use of the key",
       "Effect": "Allow",
-      "Resource": "*",
-      "Principal": {
-        "Service": "elasticfilesystem.amazonaws.com"
-      }
+      "Principal": {"AWS": [
+        "arn:aws:iam::${var.account_number}:root"
+      ]},
+      "Action": "kms:*",
+      "Resource": "*"
     }
   ]
 }
