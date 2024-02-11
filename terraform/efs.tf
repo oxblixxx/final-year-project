@@ -19,7 +19,7 @@ resource "aws_efs_file_system" "internal_efs" {
 resource "aws_efs_mount_target" "internal_efs" {
   file_system_id  = aws_efs_file_system.internal_efs.id
   subnet_id       = aws_subnet.private_subnet_main.id
-  security_groups = ["aws_security_group.internal_efs"]
+  security_groups = [aws_security_group.internal_efs.id]
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_backup_policy
