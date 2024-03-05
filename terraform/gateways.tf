@@ -1,3 +1,18 @@
+resource "aws_network_interface" "public_subnet" {
+  subnet_id   = aws_subnet.public_subnet_main.id
+  private_ips = ["10.0.0.10"]
+}
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
+resource "aws_eip" "nat_gw" {
+  domain                    = "vpc"
+  network_interface         = aws_network_interface.public_subnet.id
+  associate_with_private_ip = "10.0.0.10"
+}
+
+
+
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main_vpc.id
@@ -24,6 +39,42 @@ resource "aws_network_interface" "bastion_host" {
     device_index = 1
   }
 }
+
+
+
+resource "aws_network_interface" "nat_gw" {
+  subnet_id       = aws_subnet.private_subnet.id
+  private_ips     = ["192.168.1.21"]
+  security_groups = [aws_security_group.private_subnet.id]
+
+  attachment {
+    instance     = aws_instance.bastion_host.id
+    device_index = 1
+  }
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
+resource "aws_nat_gateway" "nat_gw" {
+  allocation_id = aws_eip.nat_gw.id
+  subnet_id     = aws_subnet.public_subnet_main.id
+
+  tags = {
+    Name = "gw NAT"
+  }
+
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.igw]
+}
+
+
+
+
+
+
+
+
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_interface_attachment
 # resource "aws_network_interface_attachment" "bastion_host" {
