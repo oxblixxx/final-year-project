@@ -32,7 +32,7 @@ resource "aws_workspaces_workspace" "unilorin" {
 # Provides a WorkSpaces directory in AWS WorkSpaces Service, Connecting MICROSOFT AD directory.
 resource "aws_workspaces_directory" "unilorin" {
   count = 2
-  directory_id = aws_directory_service_directory.unilorin.id
+  directory_id = aws_directory_service_directory.directory.id
   subnet_ids = [ aws_subnet.private_subnet_main.count.index[2] ]
 
   tags = {
