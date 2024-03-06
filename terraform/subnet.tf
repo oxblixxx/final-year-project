@@ -12,15 +12,17 @@ resource "aws_subnet" "public_subnet_main" {
 }
 
 resource "aws_subnet" "private_subnet_main" {
+  count = 3
+
   vpc_id            = aws_vpc.main_vpc.id
-  cidr_block        = "192.168.1.128/25"
-  #availability_zone = ""
-  #ss private_dns_hostname_type_on_launch = true
+  cidr_block        = cidrsubnet(aws_vpc.main_vpc.cidr_block, count.index, 28)
+
+  # Availability zone can be set here if needed
+  availability_zone = var.az[count.index]
+
+  # Tags can be added here if needed
   tags = {
-    Name = "Main"
+    Name = format("PrivateSubnet-%d", count.index)
   }
 }
-
-
-
 
