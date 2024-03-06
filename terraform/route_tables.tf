@@ -33,7 +33,19 @@ resource "aws_route_table_association" "public_subnet_main" {
   route_table_id = aws_route_table.public_subnet_main.id
 }
 
-resource "aws_route_table_association" "private_subnet_main" {
-  subnet_id      = aws_subnet.private_subnet_main.id
+resource "aws_route_table_association" "private_subnet_directory" {
+  # Loop through each private subnet and associate it with the route table
+  for_each = aws_subnet.private_subnet_directory
+  # Access the subnet ID dynamically using the index
+  subnet_id = each.value.id  
+  route_table_id = aws_route_table.private_subnet_main.id
+}
+
+
+resource "aws_route_table_association" "private_subnet_workspace" {
+  # Loop through each private subnet and associate it with the route table
+  for_each = aws_subnet.private_subnet_workspace
+  # Access the subnet ID dynamically using the index
+  subnet_id = each.value.id  
   route_table_id = aws_route_table.private_subnet_main.id
 }

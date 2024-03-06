@@ -21,7 +21,7 @@ variable "instance_type" {
 variable "account_number" {
 }
 
-variable "count" {
+variable "number" {
   default = 3
   type = number
 }

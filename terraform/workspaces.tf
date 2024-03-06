@@ -33,7 +33,7 @@ resource "aws_workspaces_workspace" "unilorin" {
 resource "aws_workspaces_directory" "unilorin" {
   count = 2
   directory_id = aws_directory_service_directory.directory.id
-  subnet_ids = [ aws_subnet.private_subnet_main.count.index[2] ]
+  subnet_ids = [for i in range(count.index) : aws_subnet.private_subnet_workspace[i].id]
 
   tags = {
     Example = true

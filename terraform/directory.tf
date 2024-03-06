@@ -6,12 +6,12 @@ resource "aws_directory_service_directory" "directory" {
   name     = "unilorin.edu.ng"
   password = "SuperSecretPassw0rd"
   edition  = "Standard"
-  size = "small"
+  size = "Small"
   type     = "MicrosoftAD"
 
   vpc_settings {
     vpc_id     = aws_vpc.main_vpc.id
-    subnet_ids = [aws_subnet.private_subnet_main.count.index[2]]
+    subnet_ids = [for i in range(count.index) : aws_subnet.private_subnet_directory[i].id]
   }
 
   tags = {
