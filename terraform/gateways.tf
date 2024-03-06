@@ -29,29 +29,29 @@ resource "aws_internet_gateway" "igw" {
 # }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_interface
-resource "aws_network_interface" "bastion_host" {
-  subnet_id       = aws_subnet.public_subnet_main.id
-  private_ips     = ["192.168.1.20"]
-  security_groups = [aws_security_group.public_subnet_main.id]
+# resource "aws_network_interface" "bastion_host" {
+#   subnet_id       = aws_subnet.public_subnet_main.id
+#   private_ips     = ["192.168.1.20"]
+#   security_groups = [aws_security_group.public_subnet_main.id]
 
-  attachment {
-    instance     = aws_instance.bastion_host.id
-    device_index = 1
-  }
-}
+#   attachment {
+#     instance     = aws_instance.bastion_host.id
+#     device_index = 1
+#   }
+# }
 
 
 
-resource "aws_network_interface" "nat_gw" {
-  subnet_id       = aws_subnet.private_subnet.id
-  private_ips     = ["192.168.1.21"]
-  security_groups = [aws_security_group.private_subnet.id]
+# resource "aws_network_interface" "nat_gw" {
+#   subnet_id       = aws_subnet.private_subnet_main.id
+#   private_ips     = ["192.168.1.21"]
+#   security_groups = [aws_security_group.private_subnet.id]
 
-  attachment {
-    instance     = aws_instance.bastion_host.id
-    device_index = 1
-  }
-}
+#   attachment {
+#     instance     = aws_instance.bastion_host.id
+#     device_index = 1
+#   }
+# }
 
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway

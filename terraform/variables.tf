@@ -20,3 +20,12 @@ variable "instance_type" {
 
 variable "account_number" {
 }
+
+variable "count" {
+  default = 3
+  type = number
+}
+
+variable "az" {
+  default = "us-east-1"
+}
