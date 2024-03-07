@@ -7,7 +7,7 @@ data "aws_workspaces_bundle" "value_windows_10" {
 
 
 resource "aws_workspaces_workspace" "unilorin" {
-  directory_id = aws_workspaces_directory.unilorin.id
+  directory_id = aws_workspaces_directory.directory.id
   bundle_id    = data.aws_workspaces_bundle.value_windows_10.id
   user_name    = "john.doe"
 
@@ -30,9 +30,9 @@ resource "aws_workspaces_workspace" "unilorin" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/workspaces_directory
 # Provides a WorkSpaces directory in AWS WorkSpaces Service, Connecting MICROSOFT AD directory.
-resource "aws_workspaces_directory" "unilorin" {
+resource "aws_workspaces_directory" "directory" {
   count = 2
-  directory_id = aws_directory_service_directory.directory.id
+  directory_id = [for i in range(count.index) : aws_directory_service_directory.directory[i].id] 
   subnet_ids = [for i in range(count.index) : aws_subnet.private_subnet_workspace[i].id]
 
   tags = {
@@ -59,7 +59,7 @@ resource "aws_workspaces_directory" "unilorin" {
   }
 
   workspace_creation_properties {
-    custom_security_group_id            = aws_security_group.example.id
+    custom_security_group_id            = aws_security_group.public_subnet_main.id
     default_ou                          = "OU=AWS,DC=Workgroup,DC=Example,DC=com"
     enable_internet_access              = true
     enable_maintenance_mode             = true
