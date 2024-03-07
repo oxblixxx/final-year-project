@@ -3,7 +3,9 @@ variable "ami" {
   default = "ami-0c7217cdde317cfec"
 }
 
-
+variable "directory_controller" {
+  default = 2
+}
 
 variable "bool" {
   default = "true"
@@ -19,4 +21,13 @@ variable "instance_type" {
 }
 
 variable "account_number" {
+}
+
+variable "number" {
+  default = 3
+  type = number
+}
+
+variable "az" {
+  default = "us-east-1"
 }

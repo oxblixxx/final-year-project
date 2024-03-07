@@ -3,7 +3,7 @@ resource "aws_kms_key" "internal_efs" {
   description = "internal efs key management"
   is_enabled = true
   enable_key_rotation = true
-  multi_region = true
+  #multi_region = true
   key_usage = "ENCRYPT_DECRYPT"
 }
 
