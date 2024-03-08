@@ -7,6 +7,8 @@ variable "directory_controller" {
   default = 2
 }
 
+
+
 variable "bool" {
   default = "true"
   type    = bool
