@@ -15,10 +15,10 @@ resource "aws_subnet" "private_subnet_directory" {
   count = 2
 
   vpc_id            = aws_vpc.main_vpc.id
-  cidr_block        = cidrsubnet(aws_vpc.main_vpc.cidr_block, count.index, 1)
+  cidr_block        = cidrsubnet(var.directory_cidr_bl, count.index, 4)
 
   # Availability zone can be set here if needed
-  availability_zone = var.az[count.index]
+  availability_zone = var.availability_zones[count.index + 1]  # Use mapping with index + 1
 
   # Tags can be added here if needed
   tags = {
@@ -28,15 +28,14 @@ resource "aws_subnet" "private_subnet_directory" {
 
 resource "aws_subnet" "private_subnet_workspace" {
   count = 2
-
   vpc_id            = aws_vpc.main_vpc.id
-  cidr_block        = cidrsubnet(aws_vpc.main_vpc.cidr_block, count.index, 2)
+  cidr_block        = cidrsubnet(var.workspace_cidr_bl, count.index, 4)  # Remove netnum
 
   # Availability zone can be set here if needed
-  availability_zone = var.az[count.index]
+  availability_zone = var.availability_zones[count.index + 1]  # Use mapping with index + 1
 
   # Tags can be added here if needed
   tags = {
-    Name = format("PrivateSubnet-%d", count.index)
+    Name = format("PrivateSubnet-Workspace-%d", count.index)
   }
 }

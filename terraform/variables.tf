@@ -7,6 +7,10 @@ variable "directory_controller" {
   default = 2
 }
 
+variable "workspaces" {
+  default = 2
+}
+
 variable "bool" {
   default = "true"
   type    = bool
@@ -28,6 +32,18 @@ variable "number" {
   type = number
 }
 
-variable "az" {
-  default = "us-east-1"
+variable "availability_zones" {
+  type = map(string)
+  default = {
+    "1" = "us-east-1a"
+    "2" = "us-east-1b"
+  }
+}
+
+variable "directory_cidr_bl" {
+  default = "192.168.1.8/29"
+}
+
+variable "workspace_cidr_bl" {
+  default = "192.168.10.8/29"
 }
