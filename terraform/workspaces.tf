@@ -7,8 +7,8 @@ data "aws_workspaces_bundle" "value_windows_10" {
 
 
 resource "aws_workspaces_workspace" "unilorin" {
-  count = var.workspaces
-  directory_id = [for i in range(count.index) : aws_directory_service_directory.directory[i].id]
+  count = 2
+  directory_id = [for i in range(count.index) : aws_directory_service_directory.directory[i].id] 
   bundle_id    = data.aws_workspaces_bundle.value_windows_10.id
   user_name    = "john.doe"
 

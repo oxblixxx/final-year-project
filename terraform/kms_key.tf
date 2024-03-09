@@ -7,7 +7,7 @@ resource "aws_kms_key" "workspaces" {
   key_usage = "ENCRYPT_DECRYPT"
 }
 
-resource "aws_kms_key_policy" "internal_efs" {
+resource "aws_kms_key_policy" "workspaces" {
   key_id = aws_kms_key.workspaces.id
   policy = <<-EOF
 {
