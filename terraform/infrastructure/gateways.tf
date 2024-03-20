@@ -1,6 +1,6 @@
 resource "aws_network_interface" "public_subnet" {
   subnet_id   = aws_subnet.public_subnet_main.id
-  private_ips = ["192.168.0.38"]
+  private_ips = ["10.8.0.5"]
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
@@ -51,25 +51,25 @@ resource "aws_internet_gateway" "igw" {
 #   }
 # }
 
-resource "aws_eip" "nat_gw_1" {
-  domain                    = "vpc"
-#  network_interface         = aws_network_interface.public_subnet.id
-}
+# resource "aws_eip" "nat_gw_1" {
+#   domain                    = "vpc"
+# #  network_interface         = aws_network_interface.public_subnet.id
+# }
 
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
-resource "aws_nat_gateway" "nat_gw" {
-  allocation_id = aws_eip.nat_gw_1.id
-  subnet_id     = aws_subnet.public_subnet_main.id
+# # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
+# resource "aws_nat_gateway" "nat_gw" {
+#   allocation_id = aws_eip.nat_gw_1.id
+#   subnet_id     = aws_subnet.public_subnet_main.id
 
-  tags = {
-    Name = "gw NAT"
-  }
+#   tags = {
+#     Name = "gw NAT"
+#   }
 
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
-  depends_on = [aws_internet_gateway.igw]
-}
+#   # To ensure proper ordering, it is recommended to add an explicit dependency
+#   # on the Internet Gateway for the VPC.
+#   depends_on = [aws_internet_gateway.igw]
+# }
 
 
 

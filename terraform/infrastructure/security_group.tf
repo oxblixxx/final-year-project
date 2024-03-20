@@ -3,7 +3,7 @@
 resource "aws_security_group" "public_subnet_main" {
   name        = "public-sg-group-1234"
   description = "Security group for bastion host in public subnet"
-  vpc_id = aws_vpc.main_vpc.id
+  vpc_id = module.vpc.id
 
   ingress {
     from_port   = 22
