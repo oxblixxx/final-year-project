@@ -1,5 +1,5 @@
 resource "aws_network_interface" "public_subnet" {
-  subnet_id   = aws_subnet.public_subnet_main.id
+  subnet_id =  module.vpc.public_subnets
   private_ips = ["10.8.0.5"]
 }
 
@@ -13,7 +13,7 @@ resource "aws_eip" "nat_gw" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.main_vpc.id
+  vpc_id = module.vpc.vpc_id
 
   tags = {
     Name = "main_vpc_igw12345"
