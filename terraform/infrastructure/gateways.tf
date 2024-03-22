@@ -1,24 +1,13 @@
-resource "aws_network_interface" "public_subnet" {
-  subnet_id =  module.vpc.public_subnets
-  private_ips = ["10.8.0.5"]
-}
+# resource "aws_network_interface" "public_subnet" {
+#   subnet_id =  module.vpc.public_subnets[0]
+#   private_ips = ["10.0.101.5"]
+# }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
-resource "aws_eip" "nat_gw" {
-  domain                    = "vpc"
-  network_interface         = aws_network_interface.public_subnet.id
-}
-
-
-
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
-resource "aws_internet_gateway" "igw" {
-  vpc_id = module.vpc.vpc_id
-
-  tags = {
-    Name = "main_vpc_igw12345"
-  }
-}
+# # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
+# resource "aws_eip" "nat_gw" {
+#   domain                    = "vpc"
+#   network_interface         = aws_network_interface.public_subnet.id
+# }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway_attachment
 # resource "aws_internet_gateway_attachment" "main_vpc" {

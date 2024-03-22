@@ -5,7 +5,7 @@ resource "aws_route_table" "public_subnet_main" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.igw.id
+    gateway_id = module.vpc.igw_id
   }
 
   tags = {
@@ -51,7 +51,7 @@ resource "aws_route_table" "private_subnet_main_3" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
 resource "aws_route_table_association" "public_subnet_main" {
-  subnet_id =  module.vpc.public_subnets.id
+  subnet_id =  module.vpc.public_subnets[0]
   route_table_id = aws_route_table.public_subnet_main.id
 }
 
@@ -80,6 +80,6 @@ resource "aws_route_table_association" "private_subnet_workspace_1" {
 
 resource "aws_route_table_association" "private_subnet_workspace_2" {
   # Access the subnet ID dynamically using the index
-  subnet_id = module.vpc.private_subnets[3] 
+  subnet_id = module.vpc.private_subnets[3]
   route_table_id = aws_route_table.private_subnet_main_3.id
 }
