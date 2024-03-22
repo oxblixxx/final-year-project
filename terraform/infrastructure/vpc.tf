@@ -28,6 +28,3 @@ resource "aws_flow_log" "main_vpc" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc
-# data "" "selected" {
-#   id = module.vpc.
-# }
