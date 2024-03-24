@@ -1,0 +1,1 @@
+To use a resource created in another directory use https://stackoverflow.com/questions/64094992/referencing-terraform-resource-created-in-a-different-folder
