@@ -15,19 +15,8 @@ resource "aws_directory_service_directory" "directory" {
 
   tags = {
     Project = "foo"
+    Environment = "production"
+    Automated = "true"
+
   }
 }
-
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/directory_service_log_subscription
-# Provides a Log subscription for AWS Directory Service that pushes logs to cloudwatch.
-# resource "aws_directory_service_log_subscription" "directory_log_1" {
-#   count = var.directory_controller
-#   directory_id   = aws_directory_service_directory.directory[0].id  
-#   log_group_name = aws_cloudwatch_log_group.directory_log.name
-# }
-
-# resource "aws_directory_service_log_subscription" "directory_log_2" {
-#   count = var.directory_controller
-#   directory_id   = aws_directory_service_directory.directory[1].id  
-#   log_group_name = aws_cloudwatch_log_group.directory_log.name
-# }

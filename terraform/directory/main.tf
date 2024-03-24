@@ -1,23 +1,20 @@
 provider "aws" {
-  # Configuration options
   region = "us-east-1"
 }
 
 
+# Configure the backend to use S3 for state file
 terraform {
-  # Configure the backend using the `backend` block
   backend "s3" {
-    # Replace these values with your S3 bucket and access key details
     bucket = "e5f28853-ed50-4181-acf4-83a9c8710645"
     key    = "directory/terraform.state"
     region = "us-east-1"
   }
 }
 
-
+# Configure data source to pull state file of infrastructure,
 data "terraform_remote_state" "vpc_id" {
   backend = "s3"
-
   config = {
     bucket = "e5f28853-ed50-4181-acf4-83a9c8710645"
     key    = "infra/terraform.state"
