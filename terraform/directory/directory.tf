@@ -1,6 +1,6 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/directory_service_directory
-
 # Provides a Managed Microsoft directory in AWS Directory Service for the Workspace.
+
 resource "aws_directory_service_directory" "directory" {
   name     = "unilorin.edu.ng"
   password = "SuperSecretPassw0rd"
@@ -9,8 +9,8 @@ resource "aws_directory_service_directory" "directory" {
   type     = "MicrosoftAD"
 
   vpc_settings {
-    vpc_id     = aws_vpc.main_vpc.id
-    subnet_ids = [for subnet in aws_subnet.private_subnet_directory : subnet.id]
+    vpc_id     = local.vpc_id
+    subnet_ids = [ local.directory_subnet_1, local.directory_subnet_2 ]
   }
 
   tags = {
