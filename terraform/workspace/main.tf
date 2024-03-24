@@ -14,3 +14,22 @@ terraform {
   }
 }
 
+data "terraform_remote_state" "infra" {
+  backend = "s3"
+
+  config = {
+    bucket = "e5f28853-ed50-4181-acf4-83a9c8710645"
+    key    = "infra/terraform.state"
+    region = "us-east-1"
+  }
+}
+
+data "terraform_remote_state" "directory" {
+  backend = "s3"
+
+  config = {
+    bucket = "e5f28853-ed50-4181-acf4-83a9c8710645"
+    key    = "directory/terraform.state"
+    region = "us-east-1"
+  }
+}

@@ -7,9 +7,9 @@ data "aws_workspaces_bundle" "value_windows_10" {
 
 
 resource "aws_workspaces_workspace" "unilorin" {
-  directory_id = aws_directory_service_directory.directory.id 
+  directory_id = local.directory_id
   bundle_id    = data.aws_workspaces_bundle.value_windows_10.id
-  user_name    = "john.doe"
+  user_name    = "administrator"
 
   root_volume_encryption_enabled = true
   user_volume_encryption_enabled = true
