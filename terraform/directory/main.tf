@@ -13,7 +13,7 @@ terraform {
 }
 
 # Configure data source to pull state file of infrastructure,
-data "terraform_remote_state" "vpc_id" {
+data "terraform_remote_state" "infrastructure" {
   backend = "s3"
   config = {
     bucket = "e5f28853-ed50-4181-acf4-83a9c8710645"
