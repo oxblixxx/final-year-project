@@ -23,7 +23,7 @@ output "workspace_subnet_2" {
   value = module.vpc.private_subnets[2]
 }
 
-
+# Output Public Security Group_Id 
 output "security_group" {
   value = aws_security_group.public_subnet_main.id
 }
