@@ -28,6 +28,6 @@ aws workdocs  create-user \
     --email-address phamust1111@gmail.com \
     --given-name pelumi \
     --surname mustapha \
-    --password @General1
+    --password
 
 An error occurred (UnauthorizedResourceAccessException) when calling the CreateUser operation: Principal [arn:aws:iam::432813148866:root] is not allowed to execute [workdocs:CreateUser] on the resource
