@@ -3,7 +3,8 @@
 
 resource "aws_directory_service_directory" "directory" {
   name     = "unilorin.edu.ng"
-  password = data.hcp_vault_secrets_app.directory_secrets.secrets.aws_directory_service_directory_directory_passwd
+  password  = "@wearetheworld"
+ # password = data.hcp_vault_secrets_app.directory_secrets.secrets.aws_directory_service_directory_directory_passwd
   edition  = "Standard"
   size     = "Small"
   type     = "MicrosoftAD"

@@ -28,80 +28,83 @@ resource "null_resource" "create_compute_engine" {
 
 
 # 
-resource "aws_launch_template" "bastion-host" {
-  name = "bastion-host"
+# resource "aws_launch_template" "bastion-host" {
+#   name = "bastion-host"
 
-  block_device_mappings {
-    device_name = "/dev/sda1"  # Assuming the root volume for Windows is usually /dev/sda1
+#   block_device_mappings {
+#     device_name = "/dev/sda1"  # Assuming the root volume for Windows is usually /dev/sda1
 
-    ebs {
-      volume_size = 50  # Adjust the volume size as needed for your Windows instance
-    }
-  }
-
-  capacity_reservation_specification {
-    capacity_reservation_preference = "open"
-  }
-
-  cpu_options {
-    core_count       = 2  # Adjust core count as needed
-    threads_per_core = 2
-  }
-
-  credit_specification {
-    cpu_credits = "standard"
-  }
-
-  disable_api_stop        = true
-  disable_api_termination = true
-
-  ebs_optimized = true
-
-#   iam_instance_profile {
-#     name = "test"  # Replace with your IAM instance profile for Windows
+#     ebs {
+#       volume_size = 50  # Adjust the volume size as needed for your Windows instance
+#     }
 #   }
 
-  image_id = "ami-03cd80cfebcbb4481"
-  instance_initiated_shutdown_behavior = "terminate"
-  instance_type = "t2.micro"  
-  key_name = data.aws_key_pair.key_pair
+#   capacity_reservation_specification {
+#     capacity_reservation_preference = "open"
+#   }
 
-  monitoring {
-    enabled = true
-  }
+#   cpu_options {
+#     core_count       = 2  # Adjust core count as needed
+#     threads_per_core = 2
+#   }
 
-  network_interfaces {
-    associate_public_ip_address = true
-  }
+#   credit_specification {
+#     cpu_credits = "standard"
+#   }
 
-  placement {
-    availability_zone = "eu-west-2a"
-  }
+#   disable_api_stop        = true
+#   disable_api_termination = true
 
-  vpc_security_group_ids = [data.terraform_remote_state.infrastructure.outputs.security_group]
+#   ebs_optimized = true
 
-  tag_specifications {
-    resource_type = "instance"
+# #   iam_instance_profile {
+# #     name = "test"  # Replace with your IAM instance profile for Windows
+# #   }
 
-    tags = {
-    Name = "Bastion host"
-    Terraform   = "true"
-    Environment = "dev"
-    }
-  }
+#   image_id = "ami-03cd80cfebcbb4481"
+#   instance_initiated_shutdown_behavior = "terminate"
+#   instance_type = "t2.micro"  
+#   key_name = data.aws_key_pair.key_pair
 
-  #user_data = filebase64("${path.module}/example.sh")  # If you have user data specific to Windows, adjust accordingly
-}
+#   monitoring {
+#     enabled = true
+#   }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group
-resource "aws_autoscaling_group" "asg" {
-  availability_zones = ["eu-west-1a"]
-  desired_capacity   = 1
-  max_size           = 1
-  min_size           = 1
+#   network_interfaces {
+#     associate_public_ip_address = true
+#   }
 
-  launch_template {
-    id      = aws_launch_template.bastion-host.id
-    version = "$Latest"
-  }
-}
+#   placement {
+#     availability_zone = "eu-west-2a"
+#   }
+
+#   vpc_security_group_ids = [data.terraform_remote_state.infrastructure.outputs.security_group]
+
+#   tag_specifications {
+#     resource_type = "instance"
+
+#     tags = {
+#     Name = "Bastion host"
+#     Terraform   = "true"
+#     Environment = "dev"
+#     }
+#   }
+
+#   #user_data = filebase64("${path.module}/example.sh")  # If you have user data specific to Windows, adjust accordingly
+# }
+
+# # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group
+# resource "aws_autoscaling_group" "asg" {
+#   availability_zones = ["eu-west-1a"]
+#   desired_capacity   = 1
+#   max_size           = 1
+#   min_size           = 1
+
+#   launch_template {
+#     id      = aws_launch_template.bastion-host.id
+#     version = "$Latest"
+#   }
+# }
+
+
+
