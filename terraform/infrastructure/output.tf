@@ -25,5 +25,11 @@ output "workspace_subnet_2" {
 
 # Output Public Security Group_Id 
 output "security_group" {
-  value = aws_security_group.public_subnet_main.id
+  value = aws_security_group.bastion_host.id
+}
+
+
+# Output public_subnet for workspace!
+output "bastion_subnet_1" {
+  value = module.vpc.public_subnets[0]
 }
