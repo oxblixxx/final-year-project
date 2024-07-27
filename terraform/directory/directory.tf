@@ -3,9 +3,9 @@
 
 resource "aws_directory_service_directory" "directory" {
   name     = "unilorin.edu.ng"
-  password  = "@wearetheworld"
+  password  = "SuperSecretPassw0rd"
  # password = data.hcp_vault_secrets_app.directory_secrets.secrets.aws_directory_service_directory_directory_passwd
-  edition  = "Standard"
+  edition  = "Standarcd"
   size     = "Small"
   type     = "MicrosoftAD"
 
@@ -26,7 +26,7 @@ resource "aws_directory_service_directory" "directory" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/key_pair
 # This pulls an already created keypair via console
 data "aws_key_pair" "key_pair" {
-  key_name           = "ox-2023-aug"
+  key_name           = "ox-directory"
   include_public_key = true
 }
 

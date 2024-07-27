@@ -22,13 +22,13 @@ module "vpc" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/flow_log
 
-resource "aws_flow_log" "main_vpc" {
-  log_destination      = aws_s3_bucket.flow_log_bucket.arn
-  log_destination_type = "s3"
-  traffic_type         = "ALL"
-  vpc_id               = module.vpc.vpc_id
-  tags = {
-    Terraform   = "true"
-    Environment = "dev"
-  }
-}
+# resource "aws_flow_log" "main_vpc" {
+#   log_destination      = aws_s3_bucket.flow_log_bucket.arn
+#   log_destination_type = "s3"
+#   traffic_type         = "ALL"
+#   vpc_id               = module.vpc.vpc_id
+#   tags = {
+#     Terraform   = "true"
+#     Environment = "dev"
+#   }
+# }
