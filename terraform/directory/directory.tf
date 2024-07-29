@@ -5,7 +5,7 @@ resource "aws_directory_service_directory" "directory" {
   name     = "unilorin.edu.ng"
   password  = "SuperSecretPassw0rd"
  # password = data.hcp_vault_secrets_app.directory_secrets.secrets.aws_directory_service_directory_directory_passwd
-  edition  = "Standard"
+  edition  = "Enterprise"
   size     = "Small"
   type     = "MicrosoftAD"
 # By default domain controller == 2.
@@ -27,13 +27,13 @@ resource "aws_directory_service_directory" "directory" {
 
 
 # Creates a replicated directory in a different region
-resource "aws_directory_service_region" "directory-2" {
+resource "aws_directory_service_region" "bcp_directory" {
   directory_id = aws_directory_service_directory.directory.id
   region_name  = data.aws_region.secondary_region.name
 
   vpc_settings {
-    vpc_id     = local.vpc_id
-    subnet_ids = [local.directory_subnet_1_eu_west_1, local.directory_subnet_2_eu_west_1]
+    vpc_id     = local.bcp_vpc_id
+    subnet_ids = [local.bcp_directory_subnet_1, local.bcp_directory_subnet_2]
   }
 
   tags = {
