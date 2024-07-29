@@ -29,7 +29,7 @@ resource "aws_directory_service_directory" "directory" {
 # Creates a replicated directory in a different region
 resource "aws_directory_service_region" "directory-2" {
   directory_id = aws_directory_service_directory.directory.id
-  region_name  = data.aws_region.example.name
+  region_name  = data.aws_region.secondary_region.name
 
   vpc_settings {
     vpc_id     = local.vpc_id
