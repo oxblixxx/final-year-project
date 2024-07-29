@@ -19,7 +19,9 @@ module "vpc" {
 
 module "vpc-2" {
   source = "terraform-aws-modules/vpc/aws"
-  provider = data.aws_region.vpc-2
+  providers = {
+    aws = aws.eu-west-1
+  }
   name = "unilorin"
   cidr = "10.0.0.0/16"
 
