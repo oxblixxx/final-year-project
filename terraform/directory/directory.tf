@@ -5,7 +5,7 @@ resource "aws_directory_service_directory" "directory" {
   name     = "unilorin.edu.ng"
   password  = "SuperSecretPassw0rd"
  # password = data.hcp_vault_secrets_app.directory_secrets.secrets.aws_directory_service_directory_directory_passwd
-  edition  = "Standarcd"
+  edition  = "Standard"
   size     = "Small"
   type     = "MicrosoftAD"
 

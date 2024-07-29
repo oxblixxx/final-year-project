@@ -10,5 +10,5 @@ locals {
 
 # Fetch Private Subnet output data from Infrastructure state file for directory
 locals {
-  directory_subnet_2 = data.terraform_remote_state.infrastructure.outputs.directory_subnet_2
+  directory_subnet_2 = data.terraform_remote_state.infrastructure.outputs.workspace_subnet_1
 }
