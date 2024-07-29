@@ -8,6 +8,8 @@ resource "aws_directory_service_directory" "directory" {
   edition  = "Standarcd"
   size     = "Small"
   type     = "MicrosoftAD"
+# By default domain controller == 2.
+#  desired_number_of_domain_controllers = 4
 
   vpc_settings {
     vpc_id     = local.vpc_id
