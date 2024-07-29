@@ -8,6 +8,8 @@ resource "aws_directory_service_directory" "directory" {
   edition  = "Standard"
   size     = "Small"
   type     = "MicrosoftAD"
+# By default domain controller == 2.
+#  desired_number_of_domain_controllers = 4
 
   vpc_settings {
     vpc_id     = local.vpc_id
@@ -23,6 +25,21 @@ resource "aws_directory_service_directory" "directory" {
 }
 
 
+
+# Creates a replicated directory in a different region
+resource "aws_directory_service_region" "directory-2" {
+  directory_id = aws_directory_service_directory.directory.id
+  region_name  = data.aws_region.secondary_region.name
+
+  vpc_settings {
+    vpc_id     = local.vpc_id
+    subnet_ids = [local.directory_subnet_1_eu_west_1, local.directory_subnet_2_eu_west_1]
+  }
+
+  tags = {
+    Name = "Secondary"
+  }
+}
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/key_pair
 # This pulls an already created keypair via console
 data "aws_key_pair" "key_pair" {

@@ -2,7 +2,14 @@ provider "aws" {
   region = "eu-west-2"
 }
 
+provider "aws" {
+  alias  = "secondary"
+  region = "eu-west-2"
+}
 
+data "aws_region" "secondary_region" {
+  provider = aws.secondary
+}
 # Configure the backend to use S3 for state file
 # terraform {
 #   backend "s3" {
