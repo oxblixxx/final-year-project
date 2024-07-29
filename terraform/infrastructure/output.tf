@@ -38,7 +38,7 @@ output "directory_subnet_1_eu-west-1" {
   value = module.vpc-2.private_subnets[0]
 }
 
-output "directory_subnet_1_eu-west-1" {
+output "directory_subnet_2_eu-west-1" {
   value = module.vpc-2.private_subnets[1]
 }
 
